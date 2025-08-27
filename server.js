@@ -3,12 +3,17 @@ import express from "express";
 const app = express();
 const port = 3113;
 
-app.get("/", (req, res) => {
-  res.send({
-    title: "What price will Ethereum hit in August? - ↑ 5000",
-    probability: 0.79,
-    volume: 14000000
-  });
+app.get("/", async (req, res) => {
+  try {
+    const response = await fetch(
+      "https://prediction-markets-research-api.noshado.ws/random"
+    );
+    const data = await response.json();
+    res.send(data);
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    res.status(500).send({ error: "Failed to fetch prediction data" });
+  }
 });
 
 app.listen(port, () => {
