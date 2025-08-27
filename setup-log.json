@@ -1,0 +1,9 @@
+{
+  "service_id": "somethin-meter-proxy",
+  "service_name": "Somethin Meter Proxy",
+  "domain": "https://somethin-meter-proxy.noshado.ws",
+  "host": "localhost",
+  "port": "3113",
+  "author": "leo",
+  "created_on": "Wed 27 Aug 2025 05:50:06 PM EDT"
+}
