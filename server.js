@@ -1,7 +1,22 @@
 import express from "express";
+import cors from "cors";
 
 const app = express();
 const port = 3113;
+
+// Configure CORS to allow specific origins
+const corsOptions = {
+  origin: [
+    "http://localhost:5173",
+    "https://localhost:5173",
+    "http://rolodex-os.fcc.lol",
+    "https://rolodex-os.fcc.lol"
+  ],
+  credentials: true,
+  optionsSuccessStatus: 200
+};
+
+app.use(cors(corsOptions));
 
 app.get("/", async (req, res) => {
   try {
