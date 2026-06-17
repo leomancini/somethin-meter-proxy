@@ -21,7 +21,7 @@ const UPSTREAM = "https://prediction-markets-research-api.noshado.ws";
 
 // Hard-coded probability range (percentages) enforced on every request.
 const MIN = 15;
-const MAX = 100;
+const MAX = 95;
 
 // Always request the fixed MIN/MAX range from the upstream API,
 // which handles probability filtering natively.
