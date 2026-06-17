@@ -33,7 +33,6 @@ async function proxy(path, req, res) {
 }
 
 app.get("/", (req, res) => proxy("/random", req, res));
-app.get("/all", (req, res) => proxy("/all", req, res));
 app.get("/random", (req, res) => proxy("/random", req, res));
 
 app.listen(port, () => {
