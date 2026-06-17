@@ -19,12 +19,15 @@ app.use(cors(corsOptions));
 
 const UPSTREAM = "https://prediction-markets-research-api.noshado.ws";
 
-// Forward ?min=X&max=Y (percentages) straight through to the upstream API,
+// Hard-coded probability range (percentages) enforced on every request.
+const MIN = 15;
+const MAX = 100;
+
+// Always request the fixed MIN/MAX range from the upstream API,
 // which handles probability filtering natively.
-async function proxy(path, req, res) {
+async function proxy(path, res) {
   try {
-    const qs = new URLSearchParams(req.query).toString();
-    const response = await fetch(`${UPSTREAM}${path}${qs ? `?${qs}` : ""}`);
+    const response = await fetch(`${UPSTREAM}${path}?min=${MIN}&max=${MAX}`);
     res.send(await response.json());
   } catch (error) {
     console.error("Error fetching data:", error);
@@ -32,8 +35,8 @@ async function proxy(path, req, res) {
   }
 }
 
-app.get("/", (req, res) => proxy("/random", req, res));
-app.get("/random", (req, res) => proxy("/random", req, res));
+app.get("/", (req, res) => proxy("/random", res));
+app.get("/random", (req, res) => proxy("/random", res));
 
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);
